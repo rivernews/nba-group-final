@@ -42,7 +42,10 @@ class Vizualization(object):
             self.augment_bmi()
             self.augment_bmi_category()
             self.augment_career_duration()
+            self.augment_normalized_position()
         elif data_csvfilename == 'draft78':
+            self.processed_data = self.cleaned_data
+        elif data_csvfilename == 'Seasons_Stats':
             self.processed_data = self.cleaned_data
 
         # Output Results
@@ -159,6 +162,18 @@ class Vizualization(object):
         ])
         return year_end - year_start + 1
     
+    def cal_normalized_postision(self, d):
+        position = self.get_field_value(d, 'position')
+        if position == 'C-F' or position == 'F-C':
+            position = 'PF'
+        elif position == 'F' or position == 'F-G':
+            position = 'SF'
+        elif position == 'G':
+            position = 'PG'
+        elif position == 'G-F':
+            position = 'SG'
+        return position
+    
     # Function Wrapper
     #
 
@@ -188,4 +203,11 @@ class Vizualization(object):
             self.processed_data,
             'career-duration',
             self.cal_career_duration
+        )
+
+    def augment_normalized_position(self):
+        self.augment_field(
+            self.processed_data,
+            'normalized-position',
+            self.cal_normalized_postision
         )
