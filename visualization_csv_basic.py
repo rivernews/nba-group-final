@@ -13,6 +13,7 @@ class CSVFileManager(object):
 class Vizualization(object):
     def __init__(self, fields_required=None, data_csvfilename=None):
         self.csv_file_manager = CSVFileManager(data_csvfilename)
+        self.fields_required = fields_required
         # Store Data in Data Structure
         with self.csv_file_manager.CSV_DATA_FILE_PATH.open(mode='r') as f:
             csv_reader = csv.reader(
@@ -27,21 +28,17 @@ class Vizualization(object):
         self.build_field_index()
         self.raw_data = self.row_data[1:]
 
-        # Cleaning
-        if not fields_required == None:
-            self.FIELDS_REQUIRED = fields_required
-        else:
-            self.FIELDS_REQUIRED = ['weight', 'height', 'position', 'year_start', 'year_end']
+        # Cleaning based on self.fields_required
         self.clean_data()
 
         # Data Processing
         self.processed_data = []
         if data_csvfilename == 'player_data':
             self.convert_height_into_float_meter()
-            self.augment_weight_in_kg()
-            self.augment_bmi()
-            self.augment_bmi_category()
-            self.augment_career_duration()
+            # self.augment_weight_in_kg()
+            # self.augment_bmi()
+            # self.augment_bmi_category()
+            # self.augment_career_duration()
             self.augment_normalized_position()
         elif data_csvfilename == 'draft78':
             self.processed_data = self.cleaned_data
@@ -68,7 +65,7 @@ class Vizualization(object):
         self.invalid_data = []
         for d in self.raw_data:
             valid = True
-            for required_field_name in self.FIELDS_REQUIRED:
+            for required_field_name in self.fields_required:
                 if (
                     (not self.get_field_value(d, required_field_name))
                 ):

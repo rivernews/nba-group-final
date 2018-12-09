@@ -2,6 +2,17 @@
 
 Description coming soon...
 
+# Outcome
+
+We now have the processed data (ready for D3) as below:
+
+- `height_banded_odrb_df.csv`: for O/DRB avg over height bands
+- Trending data against height & performance (PTS / O/DRB)
+    - `all_positions_years_height_df.csv` all positions aggregated yearly trend.
+    - `positions_years_height_df.csv` for each finve positions, aggregated yearly trend.
+
+- 
+
 # Reference
 
 - [Merge (Join) in Pandas](https://stackoverflow.com/questions/18792918/combine-two-pandas-data-frames-join-on-a-common-column)
