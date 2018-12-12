@@ -31,7 +31,7 @@ if __name__ == "__main__":
     seasons_stats_viz = Vizualization(
         data_csvfilename='Seasons_Stats',
         fields_required=[
-            'PTS', 'Player', 'ORB', 'DRB'
+            'PTS', 'Player', 'ORB', 'DRB', 'AST', 'BLK'
         ]
     )
 
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     )
 
     # clean data: if required fields N/A, drop that row
-    numeric_fields = ['PTS', 'height', 'ORB', 'DRB']
+    numeric_fields = ['PTS', 'height', 'ORB', 'DRB', 'AST', 'BLK']
     numeric_fields_df = stat_player_joined_df[numeric_fields]
     numeric_fields_df = numeric_fields_df.apply(
         pd.to_numeric, errors='coerce'
@@ -94,5 +94,9 @@ if __name__ == "__main__":
             joined_df_csv_file_manager.CSV_DATA_OUTPUT_PROCESSED_FILE_PATH
         )
     )
+
+    # part 2-1
     generate_all_positions_weighed_height_data(stat_player_joined_df)
-    generate_odrb_data(stat_player_joined_df)
+
+    # part 2-2
+    # generate_odrb_data(stat_player_joined_df)

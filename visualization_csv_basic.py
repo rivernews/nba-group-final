@@ -5,7 +5,7 @@ class CSVFileManager(object):
     def __init__(self, data_csvfilename):
         self.CSV_DATA_DIRECTORY = Path(__file__).parent / 'data'
         self.CSV_DATA_FILE_PATH = self.CSV_DATA_DIRECTORY / f'{data_csvfilename}.csv'
-        
+
         self.CSV_DATA_OUTPUT_CLEANED_FILE_PATH = self.CSV_DATA_DIRECTORY / 'cleaned' / f'cleaned_{data_csvfilename}_output.csv'
         self.CSV_DATA_OUTPUT_INVALID_FILE_PATH = self.CSV_DATA_DIRECTORY / 'cleaned' / f'invalid_{data_csvfilename}_output.csv'
         self.CSV_DATA_OUTPUT_PROCESSED_FILE_PATH = self.CSV_DATA_DIRECTORY / 'processed' / f'processed_{data_csvfilename}.csv'
